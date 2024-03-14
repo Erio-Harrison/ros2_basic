@@ -22,7 +22,7 @@ private:
         // 连接服务端
         if (!client->wait_for_action_server(std::chrono::seconds(10)))
         {
-            RCLCPP_ERROR(this->get_logger(), "服务器连接失败!");
+            RCLCPP_ERROR(this->get_logger(), "Server connection failed!");
             return;
         }
         interfaces_demo::action::Progress::Goal goal;
@@ -46,11 +46,11 @@ private:
     {
         if (!goal_handle)
         {
-            RCLCPP_INFO(this->get_logger(), "目标请求被拒绝!");
+            RCLCPP_INFO(this->get_logger(), "Target request denied!");
         }
         else
         {
-            RCLCPP_INFO(this->get_logger(), "目标正在被处理中");
+            RCLCPP_INFO(this->get_logger(), "Target is being processed");
         }
     }
     // 反馈响应
@@ -59,26 +59,26 @@ private:
         const std::shared_ptr<const interfaces_demo::action::Progress::Feedback> feedback)
     {
         double progress = feedback->progress;
-        RCLCPP_INFO(this->get_logger(), "当前进度%.2f%%", progress);
+        RCLCPP_INFO(this->get_logger(), "Current progress: %.2f%%", progress*100);
     }
     // 结果响应
     void result_callback(const rclcpp_action::ClientGoalHandle<interfaces_demo::action::Progress>::WrappedResult &result)
     {
         if (result.code == rclcpp_action::ResultCode::SUCCEEDED)
         {
-            RCLCPP_INFO(this->get_logger(), "最终结果是:%d", result.result->sum);
+            RCLCPP_INFO(this->get_logger(), "The end result is:%d", result.result->sum);
         }
         else if (result.code == rclcpp_action::ResultCode::ABORTED)
         {
-            RCLCPP_INFO(this->get_logger(), "被中断");
+            RCLCPP_INFO(this->get_logger(), "Interrupted");
         }
         else if (result.code == rclcpp_action::ResultCode::CANCELED)
         {
-            RCLCPP_INFO(this->get_logger(), "被取消");
+            RCLCPP_INFO(this->get_logger(), "Got canceled");
         }
         else
         {
-            RCLCPP_INFO(this->get_logger(), "未知错误");
+            RCLCPP_INFO(this->get_logger(), "Unknown mistake");
         }
     }
 };

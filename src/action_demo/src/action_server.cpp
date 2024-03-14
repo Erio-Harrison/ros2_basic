@@ -29,16 +29,16 @@ private:
     {
         if (goal->num <= 1)
         {
-            RCLCPP_INFO(this->get_logger(), "数据必须大于1!");
+            RCLCPP_INFO(this->get_logger(), "Data must be greater than 1!");
             return rclcpp_action::GoalResponse::REJECT;
         }
-        RCLCPP_INFO(this->get_logger(), "成功接收数据");
+        RCLCPP_INFO(this->get_logger(), "Successfully received data");
         return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
     }
     rclcpp_action::CancelResponse
     handle_cancel(std::shared_ptr<rclcpp_action::ServerGoalHandle<interfaces_demo::action::Progress>> goal_handle)
     {
-        RCLCPP_INFO(this->get_logger(), "取消请求");
+        RCLCPP_INFO(this->get_logger(), "Cancel request");
         return rclcpp_action::CancelResponse::ACCEPT;
     }
     void
@@ -58,12 +58,12 @@ private:
             double progress = i / (double)num;
             feedback->progress = progress;
             goal_handle->publish_feedback(feedback);
-            RCLCPP_INFO(this->get_logger(), "连续反馈中，进度%.2f", progress);
+            RCLCPP_INFO(this->get_logger(), "Continuous feedback on progress: %.2f%%", progress*100);
             if (goal_handle->is_canceling())
             {
                 result->sum = sum;
                 goal_handle->canceled(result);
-                RCLCPP_INFO(this->get_logger(), "取消请求");
+                RCLCPP_INFO(this->get_logger(), "Cancel request");
                 return;
             }
             rate.sleep();
