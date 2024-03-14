@@ -25,20 +25,21 @@ I tried to install it using windows, and another friend tried to install it usin
 
 3. Build the workspace using "colcon": `colcon build`
 
-If we wanna build specific folder, use: `colcon build --packages-select <packages-name>`
+   If we wanna build specific folder, use: `colcon build --packages-select <packages-name>`
 
-For example: `colon build --packages-select node_demo`
+   For example: `colon build --packages-select node_demo`
 
-4. In a new terminal session, source the environment settings file to use the newly built package: `source install/setup.bash`
+4. In a new terminal session, type this to use the newly built package:         
+   `source install/setup.bash`
 
-Please note that every time we open a new terminal, we need to run this command.
+   Please note that every time we open a new terminal, we need to run this command.
 
 5. Run the sample programs in the project: `ros2 run <your_package_name> <your_executable_name>`
 
    Example: `ros2 run node_demo node_01`
 
-Then we can see this:
+   Then we can see this:
 
-![node_demo02](./images/node_demo02.png)
+   ![node_demo02](./images/node_demo02.png)
 
-Others can also be seen on images.
+   Others can also be seen on images.
