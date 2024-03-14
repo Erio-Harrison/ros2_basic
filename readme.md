@@ -37,7 +37,7 @@ I tried to install it using windows, and another friend tried to install it usin
 
 5. Run the sample programs in the project: `ros2 run <your_package_name> <your_executable_name>`
 
-   Example: `ros2 run node_demo node_01`
+   Example: `ros2 run node_demo node_02`
 
    Then we can see this:
 
