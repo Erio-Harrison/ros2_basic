@@ -20,7 +20,7 @@ public:
     }
 
 private:
-    // 声明动作服务端
+    // Declare action server
     rclcpp_action::Server<interfaces_demo::action::Progress>::SharedPtr
         server;
     rclcpp_action::GoalResponse handle_goal(const rclcpp_action::GoalUUID
@@ -48,7 +48,7 @@ private:
             std::make_shared<interfaces_demo::action::Progress::Feedback>();
         auto result =
             std::make_shared<interfaces_demo::action::Progress::Result>();
-        // 生成连续反馈给客户端
+        // Generate continuous feedback to the client
         int num = goal_handle->get_goal()->num;
         int sum = 0;
         rclcpp::Rate rate(1);
@@ -68,7 +68,7 @@ private:
             }
             rate.sleep();
         }
-        // 生成最终相应结果
+        // Generate final corresponding results
         if (rclcpp::ok())
         {
             result->sum = sum;
@@ -79,7 +79,7 @@ private:
     handle_accepted(std::shared_ptr<rclcpp_action::ServerGoalHandle<interfaces_demo::action::Progress>>
                         goal_handle)
     {
-        // 新建线程处理反馈
+        // Create a new thread to handle feedback
         std::thread(std::bind(&ActionServer::execute, this,
                               goal_handle))
             .detach();

@@ -14,12 +14,12 @@ public:
     }
 
 private:
-    // 声明动作客户端
+    // Declare action client
     rclcpp_action::Client<interfaces_demo::action::Progress>::SharedPtr
         client;
     void send_goal(int num)
     {
-        // 连接服务端
+        // Connect to server
         if (!client->wait_for_action_server(std::chrono::seconds(10)))
         {
             RCLCPP_ERROR(this->get_logger(), "Server connection failed!");
@@ -37,10 +37,10 @@ private:
                       std::placeholders::_2);
         options.result_callback = std::bind(&ActionClient::result_callback,
                                             this, std::placeholders::_1);
-        // 发送请求
+        // send request
         client->async_send_goal(goal, options);
     }
-    // 目标响应
+    // target response
     void
     goal_response_callback(rclcpp_action::ClientGoalHandle<interfaces_demo::action::Progress>::SharedPtr goal_handle)
     {
@@ -53,7 +53,7 @@ private:
             RCLCPP_INFO(this->get_logger(), "Target is being processed");
         }
     }
-    // 反馈响应
+    // feedback response
     void feedback_callback(
         rclcpp_action::ClientGoalHandle<interfaces_demo::action::Progress>::SharedPtr goal_handle,
         const std::shared_ptr<const interfaces_demo::action::Progress::Feedback> feedback)
@@ -61,7 +61,7 @@ private:
         double progress = feedback->progress;
         RCLCPP_INFO(this->get_logger(), "Current progress: %.2f%%", progress*100);
     }
-    // 结果响应
+    // result response
     void result_callback(const rclcpp_action::ClientGoalHandle<interfaces_demo::action::Progress>::WrappedResult &result)
     {
         if (result.code == rclcpp_action::ResultCode::SUCCEEDED)
