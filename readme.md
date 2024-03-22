@@ -30,10 +30,27 @@ I tried to install it using windows, and another friend tried to install it usin
 
    For example: `colon build --packages-select node_demo`
 
-4. In a new terminal session, type this to use the newly built package:         
+4. In a new terminal session, type this to use the newly built package:
+
+   `source /opt/ros/iron/setup.bash`         
    `source install/setup.bash`
 
    Please note that every time we open a new terminal, we need to run this command.
+
+   If you don't want to do so. another way is trying to edit `.bashrc` file:
+
+   First, type `nano ~/.bashrc` in terminal
+
+   Second, Add the following lines at the end of the file:
+
+   `source /opt/ros/iron/setup.bash`
+   `source ~/Desktop/ros2_basic/install/local_setup.bash`
+
+   In order for these changes to take effect, you have two options:
+
+   Effective immediately: Run the following command in the current terminal to apply the changes immediately: `source ~/.bashrc`
+
+   Reopen the terminal: Close the current terminal and reopen a new terminal. Changes in `.bashrc` will be applied automatically.
 
 5. Run the sample programs in the project: `ros2 run <your_package_name> <your_executable_name>`
 
