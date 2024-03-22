@@ -33,7 +33,7 @@ I tried to install it using windows, and another friend tried to install it usin
 4. In a new terminal session, type this to use the newly built package:
 
    `source /opt/ros/iron/setup.bash`   
-         
+
    `source install/setup.bash`
 
    Please note that every time we open a new terminal, we need to run this command.
@@ -50,9 +50,9 @@ I tried to install it using windows, and another friend tried to install it usin
 
    In order for these changes to take effect, you have two options:
 
-   Effective immediately: Run the following command in the current terminal to apply the changes immediately: `source ~/.bashrc`
+   **Effective immediately**: Run the following command in the current terminal to apply the changes immediately: `source ~/.bashrc`
 
-   Reopen the terminal: Close the current terminal and reopen a new terminal. Changes in `.bashrc` will be applied automatically.
+   **Reopen the terminal**: Close the current terminal and reopen a new terminal. Changes in `.bashrc` will be applied automatically.
 
 5. Run the sample programs in the project: `ros2 run <your_package_name> <your_executable_name>`
 
