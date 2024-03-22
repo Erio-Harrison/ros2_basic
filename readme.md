@@ -32,7 +32,8 @@ I tried to install it using windows, and another friend tried to install it usin
 
 4. In a new terminal session, type this to use the newly built package:
 
-   `source /opt/ros/iron/setup.bash`         
+   `source /opt/ros/iron/setup.bash`   
+         
    `source install/setup.bash`
 
    Please note that every time we open a new terminal, we need to run this command.
@@ -44,6 +45,7 @@ I tried to install it using windows, and another friend tried to install it usin
    Second, Add the following lines at the end of the file:
 
    `source /opt/ros/iron/setup.bash`
+
    `source ~/Desktop/ros2_basic/install/local_setup.bash`
 
    In order for these changes to take effect, you have two options:
