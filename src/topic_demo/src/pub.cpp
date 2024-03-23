@@ -19,15 +19,19 @@ private:
     rclcpp::Publisher<interfaces_demo::msg::PersonInfo>::SharedPtr pub;
     // 3.发布信息
     void send_msg()
-    {
+    { 
+        interfaces_demo::msg::PersonInfo info2;
+        info2.name = "li si";
+        info2.age = 22;
+
         interfaces_demo::msg::PersonInfo info;
         // 创建消息
         info.name = "zhang san";
         info.age = 18;
         // 日志打印
-        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info.name.c_str());
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info2.name.c_str());
         // 发布消息
-        pub->publish(info);
+        pub->publish(info2);
     }
     // 4. 声明定时器
     rclcpp::TimerBase::SharedPtr timer_;

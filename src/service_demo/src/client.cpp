@@ -22,7 +22,7 @@ private:
     {
         RCLCPP_INFO(this->get_logger(), "Receiving a response");
         auto result = response.get();
-        RCLCPP_INFO(this->get_logger(), "sum: %d", result->sum);
+        RCLCPP_INFO(this->get_logger(), "sum: %ld", result->sum);
     }
     // 4.发送请求函数
     void send_request()
