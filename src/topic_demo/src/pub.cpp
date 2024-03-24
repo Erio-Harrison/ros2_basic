@@ -7,17 +7,17 @@ public:
     Pub(std::string name) : Node(name)
     {
         RCLCPP_INFO(this->get_logger(), "node is running.");
-        // 2.创建发布者
+        // 2.Create publisher
         pub = this->create_publisher<interfaces_demo::msg::PersonInfo>("name", 10);
-        // 创建定时器发布信息
+        // Create timer to publish information
         timer_ = this->create_wall_timer(std::chrono::milliseconds(1000),
                                          std::bind(&Pub::send_msg, this));
     }
 
 private:
-    // 1. 声明发布者
+    // 1. Claim publisher
     rclcpp::Publisher<interfaces_demo::msg::PersonInfo>::SharedPtr pub;
-    // 3.发布信息
+    // 3.release news
     void send_msg()
     { 
         interfaces_demo::msg::PersonInfo info2;
@@ -25,15 +25,17 @@ private:
         info2.age = 22;
 
         interfaces_demo::msg::PersonInfo info;
-        // 创建消息
+        // Create message
         info.name = "zhang san";
         info.age = 18;
-        // 日志打印
+        // Log printing
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info.name.c_str());
         RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info2.name.c_str());
-        // 发布消息
+        // make an announcement
+        pub->publish(info);
         pub->publish(info2);
     }
-    // 4. 声明定时器
+    // 4. declare timer
     rclcpp::TimerBase::SharedPtr timer_;
 };
 

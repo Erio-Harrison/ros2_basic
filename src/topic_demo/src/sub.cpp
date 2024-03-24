@@ -7,18 +7,18 @@ public:
     Sub(std::string name) : Node(name)
     {
         RCLCPP_INFO(this->get_logger(), "node is running.");
-        // 3. 创建订阅者
+        // 3. Create a subscriber
         sub = this->create_subscription<interfaces_demo::msg::PersonInfo>("name", 10,
                                                                           std::bind(&Sub::sub_callback, this, std::placeholders::_1));
     }
 
 private:
-    // 1.声明订阅者
+    // 1.Declare subscribers
     rclcpp::Subscription<interfaces_demo::msg::PersonInfo>::SharedPtr sub;
-    // 2.订阅者回调函数
+    // 2.Subscriber callback function
     void sub_callback(const interfaces_demo::msg::PersonInfo::SharedPtr msgs)
     {
-        RCLCPP_INFO(this->get_logger(), "Receiving name: %s, age: %d",
+        RCLCPP_INFO(this->get_logger(), "Receiving name: %s, age: %ld",
                     msgs->name.c_str(),
                     msgs->age);
     }
