@@ -18,9 +18,13 @@ private:
     // 2.Subscriber callback function
     void sub_callback(const interfaces_demo::msg::PersonInfo::SharedPtr msgs)
     {
-        RCLCPP_INFO(this->get_logger(), "Receiving name: %s, age: %ld",
-                    msgs->name.c_str(),
-                    msgs->age);
+        RCLCPP_INFO(this->get_logger(), "Receiving name: %s, id: %ld, side: %s \n                                     timestamp: %s, size: %ld, price: %ld",
+                    msgs->symbol.c_str(),
+                    msgs->id,
+                    msgs->side.c_str(),
+                    msgs->timestamp.c_str(),
+                    msgs->size,
+                    msgs->price);
     }
 };
 int main(int argc, char **argv)

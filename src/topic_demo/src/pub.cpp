@@ -20,20 +20,20 @@ private:
     // 3.release news
     void send_msg()
     { 
-        interfaces_demo::msg::PersonInfo info2;
-        info2.name = "li si";
-        info2.age = 22;
 
         interfaces_demo::msg::PersonInfo info;
         // Create message
-        info.name = "zhang san";
-        info.age = 18;
+        info.symbol = "XBTUSD";
+        info.id = 25585432705;
+        info.side = "Sell";
+        info.timestamp = "2024-03-24T13:50:14.196Z";
+        info.size = 34000;
+        info.price = 65479;
         // Log printing
-        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info.name.c_str());
-        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info2.name.c_str());
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info.symbol.c_str());
+
         // make an announcement
         pub->publish(info);
-        pub->publish(info2);
     }
     // 4. declare timer
     rclcpp::TimerBase::SharedPtr timer_;
