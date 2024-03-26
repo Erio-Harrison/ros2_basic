@@ -24,6 +24,16 @@ find_package(Parquet REQUIRED)  # Find Parquet separately if needed
 # Include directories for both Arrow and Parquet
 include_directories(${ARROW_INCLUDE_DIR})
 include_directories(${PARQUET_INCLUDE_DIR})
+include(FetchContent)
+
+FetchContent_Declare(
+  json
+  GIT_REPOSITORY https://github.com/nlohmann/json.git
+  GIT_TAG v3.10.5
+)
+
+FetchContent_MakeAvailable(json)
+
 
 # Linter settings
 if(BUILD_TESTING)
@@ -46,6 +56,9 @@ target_link_libraries(pub ${ARROW_SHARED_LIB} ${PARQUET_SHARED_LIB})
 target_link_libraries(sub ${ARROW_SHARED_LIB} ${PARQUET_SHARED_LIB})
 target_link_libraries(pub ${ARROW_SHARED_LIB})  # Link Arrow to pub
 target_link_libraries(sub ${ARROW_SHARED_LIB})  # Link Arrow to sub
+target_include_directories(pub PRIVATE ${json_SOURCE_DIR}/single_include)
+
+
 # If Parquet is separate, uncomment the following lines
 
 

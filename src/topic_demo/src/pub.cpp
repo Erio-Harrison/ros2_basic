@@ -1,3 +1,10 @@
+#include <boost/beast/core.hpp>
+#include <boost/beast/websocket.hpp>
+#include <boost/asio/connect.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <cstdlib>
+#include <iostream>
+#include <string>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "interfaces_demo/msg/person_info.hpp"
@@ -29,11 +36,21 @@ private:
         info.timestamp = "2024-03-24T13:50:14.196Z";
         info.size = 34000;
         info.price = 65479;
+
+        interfaces_demo::msg::PersonInfo info2;
+        info2.symbol = "ASDFG";
+        info2.id = 1584;
+        info2.side = "sold";
+        info2.timestamp = "2024-03-24T88:50:14.196Z";
+        info2.size = 987456;
+        info2.price = 89522;
         // Log printing
         RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info.symbol.c_str());
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", info2.symbol.c_str());
 
         // make an announcement
         pub->publish(info);
+        pub->publish(info2);
     }
     // 4. declare timer
     rclcpp::TimerBase::SharedPtr timer_;
