@@ -10,7 +10,7 @@ The project I worked on recently will use ROS2, so I learned the basic usage. Th
 
 ## Install
 
-[Tutotial Document](https://docs.ros.org/en/iron/Tutorials.html)
+[Tutotial Document](https://docs.ros.org/en/iron/Installation/Ubuntu-Install-Debians.html)
 
 I tried to install it using windows, and another friend tried to install it using mac, but we all encountered problems during the "build". Then I finally chose to install Ubuntu on a virtual machine, and then connected it using SSH in VScode for programming. And it is easier to install.
 
