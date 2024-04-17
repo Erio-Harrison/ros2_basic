@@ -16,25 +16,49 @@ I tried to install it using windows, and another friend tried to install it usin
 
 ## Use
 
-1. Clone repository: `git clone https://github.com/Erio-Harrison/ros2_basic.git`
+1. Clone repository: 
 
-   Then: `cd ros2_basic`
+   ```bash
+   git clone https://github.com/Erio-Harrison/ros2_basic.git
+   ```
 
-2. Install dependencies: `rosdep install --from-paths src --ignore-src --rosdistro iron -y`
+   Then: 
+
+   ```bash
+   cd ros2_basic
+   ```
+
+2. Install dependencies: 
+
+   ```bash
+   rosdep install --from-paths src --ignore-src --rosdistro iron -y
+   ```
 
    Here I installed the iron version. If use others, please replace "iron" with sepcific version name.
 
-3. Build the workspace using "colcon": `colcon build`
+3. Build the workspace using "colcon": 
+
+   ```
+   colcon build
+   ```
 
    If we wanna build specific folder, use: `colcon build --packages-select <packages-name>`
 
-   For example: `colon build --packages-select node_demo`
+   For example: 
+
+   ```bash
+   colon build --packages-select node_demo
+   ```
 
 4. In a new terminal session, type this to use the newly built package:
 
-   `source /opt/ros/iron/setup.bash`   
+   ```bash
+   source /opt/ros/iron/setup.bash
+   ```
 
-   `source install/setup.bash`
+   ```bash
+   `source ~/Desktop/ros2_basic/install/local_setup.bash`
+   ```
 
    Please note that every time we open a new terminal, we need to run this command.
 
@@ -44,9 +68,13 @@ I tried to install it using windows, and another friend tried to install it usin
 
    **Second**, Add the following lines at the end of the file:
 
-   `source /opt/ros/iron/setup.bash`
+   ```bash
+   source /opt/ros/iron/setup.bash
+   ```
 
+   ```bash
    `source ~/Desktop/ros2_basic/install/local_setup.bash`
+   ```
 
    In order for these changes to take effect, you have two options:
 
@@ -56,7 +84,11 @@ I tried to install it using windows, and another friend tried to install it usin
 
 5. Run the sample programs in the project: `ros2 run <your_package_name> <your_executable_name>`
 
-   Example: `ros2 run node_demo node_02`
+   Example: 
+
+   ```bash
+   ros2 run node_demo node_02
+   ```
 
    Then we can see this:
 
