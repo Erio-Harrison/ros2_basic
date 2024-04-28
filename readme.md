@@ -57,14 +57,22 @@ I tried to install it using windows, and another friend tried to install it usin
    ```
 
    ```bash
-   `source ~/Desktop/ros2_basic/install/local_setup.bash`
+   source ~/Desktop/ros2_basic/install/local_setup.bash
    ```
 
    Please note that every time we open a new terminal, we need to run this command.
 
    If you don't want to do so. another way is trying to edit `.bashrc` file:
 
-   **First**, type `nano ~/.bashrc` in terminal
+   **First** 
+   
+   type 
+
+   ```bash
+   nano ~/.bashrc
+   ```
+
+   in terminal
 
    **Second**, Add the following lines at the end of the file:
 
@@ -73,7 +81,7 @@ I tried to install it using windows, and another friend tried to install it usin
    ```
 
    ```bash
-   `source ~/Desktop/ros2_basic/install/local_setup.bash`
+   source ~/Desktop/ros2_basic/install/local_setup.bash
    ```
 
    In order for these changes to take effect, you have two options:
