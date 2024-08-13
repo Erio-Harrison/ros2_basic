@@ -8,6 +8,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "interfaces_demo/msg/person_info.hpp"
+
 class Pub : public rclcpp::Node
 {
 public:

@@ -9,7 +9,7 @@ public:
         RCLCPP_INFO(this->get_logger(), "node is running.");
         // 3. Create a subscriber
         sub = this->create_subscription<interfaces_demo::msg::PersonInfo>("name", 10,
-                                                                          std::bind(&Sub::sub_callback, this, std::placeholders::_1));
+                std::bind(&Sub::sub_callback, this, std::placeholders::_1));
     }
 
 private:

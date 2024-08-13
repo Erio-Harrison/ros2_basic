@@ -7,16 +7,14 @@ public:
     ActionClient(std::string name) : Node(name)
     {
         RCLCPP_INFO(this->get_logger(), "ActionClient is running.");
-        client =
-            rclcpp_action::create_client<interfaces_demo::action::Progress>(this,
-                                                                            "get_sum");
+        client = rclcpp_action::create_client<interfaces_demo::action::Progress>(this, "get_sum");
         send_goal(10);
     }
 
 private:
     // Declare action client
-    rclcpp_action::Client<interfaces_demo::action::Progress>::SharedPtr
-        client;
+    rclcpp_action::Client<interfaces_demo::action::Progress>::SharedPtr client;
+
     void send_goal(int num)
     {
         // Connect to server
@@ -41,6 +39,7 @@ private:
         client->async_send_goal(goal, options);
     }
     // target response
+
     void
     goal_response_callback(rclcpp_action::ClientGoalHandle<interfaces_demo::action::Progress>::SharedPtr goal_handle)
     {
