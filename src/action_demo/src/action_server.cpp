@@ -36,23 +36,24 @@ private:
     }
 
     rclcpp_action::CancelResponse
-    handle_cancel(std::shared_ptr<rclcpp_action::ServerGoalHandle<interfaces_demo::action::Progress>> goal_handle)
+    handle_cancel(std::shared_ptr<rclcpp_action::ServerGoalHandle<interfaces_demo::action::Progress>> 
+                    goal_handle)
     {
         RCLCPP_INFO(this->get_logger(), "Cancel request");
         return rclcpp_action::CancelResponse::ACCEPT;
     }
 
-    void
-    execute(std::shared_ptr<rclcpp_action::ServerGoalHandle<interfaces_demo::action::Progress>> goal_handle)
+    void execute(std::shared_ptr<rclcpp_action::ServerGoalHandle<interfaces_demo::action::Progress>> 
+                    goal_handle)
     {
-        auto feedback =
-            std::make_shared<interfaces_demo::action::Progress::Feedback>();
-        auto result =
-            std::make_shared<interfaces_demo::action::Progress::Result>();
+        auto feedback = std::make_shared<interfaces_demo::action::Progress::Feedback>();
+        auto result = std::make_shared<interfaces_demo::action::Progress::Result>();
+
         // Generate continuous feedback to the client
         int num = goal_handle->get_goal()->num;
         int sum = 0;
         rclcpp::Rate rate(1);
+
         for (int i = 1; i <= num; i++)
         {
             sum += i;
@@ -69,21 +70,22 @@ private:
             }
             rate.sleep();
         }
+
         // Generate final corresponding results
         if (rclcpp::ok())
         {
             result->sum = sum;
             goal_handle->succeed(result);
         }
-    } // std::function<void (std::shared_ptr<ServerGoalHandle<ActionT>>)>
 
-    void
+    }
+
+    void 
     handle_accepted(std::shared_ptr<rclcpp_action::ServerGoalHandle<interfaces_demo::action::Progress>>
                         goal_handle)
     {
         // Create a new thread to handle feedback
-        std::thread(std::bind(&ActionServer::execute, this,
-                              goal_handle)).detach();
+        std::thread(std::bind(&ActionServer::execute, this, goal_handle)).detach();
     }
 };
 

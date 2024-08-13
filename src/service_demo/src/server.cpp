@@ -6,15 +6,15 @@ public:
     Server(std::string name) : Node(name)
     {
         RCLCPP_INFO(this->get_logger(), "node is running.");
-        // 3.创建服务端
+        // 3.Creating a server
         server = this->create_service<interfaces_demo::srv::AddTwoInt>("service", std::bind(&Server::server_callback, this,
                                                                                             std::placeholders::_1, std::placeholders::_2));
     }
 
 private:
-    // 1.声明服务端
+    // 1.Declare the server
     rclcpp::Service<interfaces_demo::srv::AddTwoInt>::SharedPtr server;
-    // 2.服务端回调函数
+    // 2.Server callback function
     void server_callback(const interfaces_demo::srv::AddTwoInt::Request::SharedPtr request,
                          const interfaces_demo::srv::AddTwoInt::Response::SharedPtr response)
     {

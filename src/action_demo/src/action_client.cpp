@@ -23,18 +23,22 @@ private:
             RCLCPP_ERROR(this->get_logger(), "Server connection failed!");
             return;
         }
+
         interfaces_demo::action::Progress::Goal goal;
         goal.num = num;
-        rclcpp_action::Client<interfaces_demo::action::Progress>::SendGoalOptions
-            options;
+        rclcpp_action::Client<interfaces_demo::action::Progress>::SendGoalOptions options;
+
         options.goal_response_callback =
             std::bind(&ActionClient::goal_response_callback, this,
                       std::placeholders::_1);
+
         options.feedback_callback =
             std::bind(&ActionClient::feedback_callback, this, std::placeholders::_1,
                       std::placeholders::_2);
+
         options.result_callback = std::bind(&ActionClient::result_callback,
                                             this, std::placeholders::_1);
+
         // send request
         client->async_send_goal(goal, options);
     }
@@ -52,6 +56,7 @@ private:
             RCLCPP_INFO(this->get_logger(), "Target is being processed");
         }
     }
+
     // feedback response
     void feedback_callback(
         rclcpp_action::ClientGoalHandle<interfaces_demo::action::Progress>::SharedPtr goal_handle,
@@ -60,6 +65,7 @@ private:
         double progress = feedback->progress;
         RCLCPP_INFO(this->get_logger(), "Current progress: %.2f%%", progress*100);
     }
+
     // result response
     void result_callback(const rclcpp_action::ClientGoalHandle<interfaces_demo::action::Progress>::WrappedResult &result)
     {
@@ -81,6 +87,7 @@ private:
         }
     }
 };
+
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
