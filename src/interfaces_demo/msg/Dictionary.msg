@@ -1,0 +1,2 @@
+# Dictionary.msg
+KeyValue[] data

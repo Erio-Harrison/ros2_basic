@@ -16,6 +16,8 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 "msg/PersonInfo.msg"
 "srv/AddTwoInt.srv"
 "action/Progress.action"
+"msg/KeyValue.msg"
+"msg/Dictionary.msg"
 DEPENDENCIES
 )
 
