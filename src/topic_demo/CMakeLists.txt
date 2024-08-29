@@ -17,23 +17,22 @@ find_package(interfaces_demo REQUIRED)
 find_package(Arrow REQUIRED)  # Finds Apache Arrow
 find_package(Parquet REQUIRED)  # Find Parquet separately if needed
 
-# If linking Parquet separately is needed (comment out if not)
-# find_package(Parquet REQUIRED)
-# include_directories(${PARQUET_INCLUDE_DIR})
-
 # Include directories for both Arrow and Parquet
 include_directories(${ARROW_INCLUDE_DIR})
 include_directories(${PARQUET_INCLUDE_DIR})
-include(FetchContent)
 
-FetchContent_Declare(
-  json
-  GIT_REPOSITORY https://github.com/nlohmann/json.git
-  GIT_TAG v3.10.5
-)
+# Try to find nlohmann_json
+find_package(nlohmann_json QUIET)
 
-FetchContent_MakeAvailable(json)
-
+if(NOT nlohmann_json_FOUND)
+  include(FetchContent)
+  FetchContent_Declare(
+    json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.10.5
+  )
+  FetchContent_MakeAvailable(json)
+endif()
 
 # Linter settings
 if(BUILD_TESTING)
@@ -50,17 +49,17 @@ ament_target_dependencies(pub "rclcpp" "std_msgs" "interfaces_demo")
 ament_target_dependencies(sub "rclcpp" "std_msgs" "interfaces_demo")
 
 # Link libraries with executables
-# Link Arrow (and Parquet if separate) with your executables
-# Link both Arrow and Parquet with your executables
 target_link_libraries(pub ${ARROW_SHARED_LIB} ${PARQUET_SHARED_LIB})
 target_link_libraries(sub ${ARROW_SHARED_LIB} ${PARQUET_SHARED_LIB})
-target_link_libraries(pub ${ARROW_SHARED_LIB})  # Link Arrow to pub
-target_link_libraries(sub ${ARROW_SHARED_LIB})  # Link Arrow to sub
-target_include_directories(pub PRIVATE ${json_SOURCE_DIR}/single_include)
 
-
-# If Parquet is separate, uncomment the following lines
-
+# Link JSON library
+if(TARGET nlohmann_json::nlohmann_json)
+  target_link_libraries(pub nlohmann_json::nlohmann_json)
+  target_link_libraries(sub nlohmann_json::nlohmann_json)
+else()
+  target_link_libraries(pub nlohmann_json)
+  target_link_libraries(sub nlohmann_json)
+endif()
 
 # Install the executables
 install(TARGETS pub sub DESTINATION lib/${PROJECT_NAME})
