@@ -2,6 +2,13 @@
 #include "interfaces_demo/msg/key_value.hpp"
 #include "interfaces_demo/msg/dictionary.hpp"
 
+
+/*
+1. QoS depth 0: The specified depth is 0, but due to the use of keep_all(), the subscriber actually receives all historical messages.
+2. keep_all(): The subscriber will receive all published messages of the topic.
+3. transient_local(): Even messages published before the subscriber is created will be received, provided that the lifecycles of the publisher and subscriber overlap.
+4. reliable(): The message transmission is reliable, ensuring that all messages are successfully received, which is suitable for situations with high requirements for message integrity.
+*/
 class Sub : public rclcpp::Node
 {
 public:
@@ -9,7 +16,8 @@ public:
     {
         RCLCPP_INFO(this->get_logger(), "Node is running.");
         // 3. Create a subscriber
-        sub = this->create_subscription<interfaces_demo::msg::Dictionary>("name", 10,
+        
+        sub = this->create_subscription<interfaces_demo::msg::Dictionary>("topic_msg", rclcpp::QoS(10).keep_all().transient_local().reliable(),
                 std::bind(&Sub::sub_callback, this, std::placeholders::_1));
     }
 

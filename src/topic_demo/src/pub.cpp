@@ -9,7 +9,9 @@ public:
     {
         RCLCPP_INFO(this->get_logger(), "Node is running.");
         // 2. Create publisher
-        pub = this->create_publisher<interfaces_demo::msg::Dictionary>("name", 10);
+        pub = this->create_publisher<interfaces_demo::msg::Dictionary>("topic_msg", 
+                                                                        rclcpp::QoS(10).transient_local().reliable());
+
         // Create timer to publish information
         timer_ = this->create_wall_timer(std::chrono::milliseconds(1000),
                                          std::bind(&Pub::send_msg, this));
