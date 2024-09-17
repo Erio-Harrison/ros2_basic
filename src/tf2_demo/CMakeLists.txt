@@ -29,7 +29,19 @@ ament_target_dependencies(tf2_broadcaster rclcpp tf2_ros)
 add_executable(tf2_listener src/tf2_listener.cpp)
 ament_target_dependencies(tf2_listener rclcpp tf2_ros)
 
+add_executable(dynamic_transform_broadcaster src/dynamic_transform_broadcaster.cpp)
+ament_target_dependencies(dynamic_transform_broadcaster rclcpp tf2_ros)
+
+add_executable(static_transform_broadcaster src/static_transform_broadcaster.cpp)
+ament_target_dependencies(static_transform_broadcaster rclcpp tf2_ros)
+
+add_executable(transform_listener src/transform_listener.cpp)
+ament_target_dependencies(transform_listener rclcpp tf2_ros)
+
 install(TARGETS
   tf2_broadcaster
   tf2_listener
+  dynamic_transform_broadcaster
+  static_transform_broadcaster
+  transform_listener
   DESTINATION lib/${PROJECT_NAME})
